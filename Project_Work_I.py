@@ -10,7 +10,7 @@ class AddEmployeeForm(QDialog):
     def __init__(self, parent, callback_func):
         super(AddEmployeeForm, self).__init__(parent)
 
-        uic.loadUi("AddEmployeeForm.ui", self)
+        uic.loadUi("./Resources/AddEmployeeForm.ui", self)
 
         self.btnAdd.clicked.connect(lambda: self.callback(callback_func))
         self.btnCancel.clicked.connect(self.close)
@@ -41,7 +41,7 @@ class AddEmployeeForm(QDialog):
 class EmployeeSearchForm(QMainWindow):
     def __init__(self, cursor):
         super(EmployeeSearchForm, self).__init__()
-        uic.loadUi("EmployeeSearchForm.ui", self)
+        uic.loadUi("./Resources/EmployeeSearchForm.ui", self)
         self._addEmployeeForm = AddEmployeeForm(self, self.add_employee)
         self.cursor = cursor
         self.editEmployeeName.returnPressed.connect(
@@ -121,7 +121,7 @@ class EmployeeSearchForm(QMainWindow):
 
 def main():
     try:
-        connection = sqlite3.connect("EmployeeData.db")
+        connection = sqlite3.connect("./Resources/EmployeeData.db")
         cursor = connection.cursor()
 
         app = QApplication.instance()
@@ -140,6 +140,7 @@ def main():
             cursor.close()
             print("Closed cursor.")
         if connection:
+            connection.commit()
             connection.close()
             print("Closed connection.")
 

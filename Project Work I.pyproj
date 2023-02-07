@@ -28,8 +28,13 @@
     <InterpreterReference Include="Global|VisualStudio|Python env for MIBA Projects" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="database.txt" />
-    <Resource Include="EmployeeData.db" />
+    <Resource Include="Resources\AddEmployeeForm.ui" />
+    <Content Include="Resources\database.txt" />
+    <Resource Include="Resources\EmployeeData.db" />
+    <Resource Include="Resources\EmployeeSearchForm.ui" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Resources\" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\Python Tools\Microsoft.PythonTools.targets" />
   <!-- Uncomment the CoreCompile target to enable the Build command in

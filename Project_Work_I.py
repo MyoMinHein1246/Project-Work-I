@@ -1,6 +1,20 @@
+from multiprocessing import resource_sharer
 from PyQt5.QtWidgets import *
 from PyQt5 import uic
 import sqlite3
+
+
+def resource_path(relative_path) -> str:
+    import os, sys
+
+    """ Get absolute path to resource, works for dev and for PyInstaller """
+    try:
+        # PyInstaller creates a temp folder and stores path in _MEIPASS
+        base_path = sys._MEIPASS
+    except Exception:
+        base_path = os.path.abspath(".")
+
+    return os.path.join(base_path, relative_path)
 
 
 DATA_HEADERS = ["Id", "First name", "Last name", "Job", "Salary", "Address"]
@@ -10,10 +24,10 @@ class AddEmployeeForm(QDialog):
     def __init__(self, parent, callback_func):
         super(AddEmployeeForm, self).__init__(parent)
 
-        uic.loadUi("./Resources/AddEmployeeForm.ui", self)
+        uic.loadUi(resource_path("./Resources/AddEmployeeForm.ui"), self)
 
         self.btnAdd.clicked.connect(lambda: self.callback(callback_func))
-        self.btnCancel.clicked.connect(self.close)
+        self.btnCancel.clicked.connect(lambda: self.destroy(True))
         self.closeEvent = self.clear()
 
     def callback(self, callback_func):
@@ -28,7 +42,7 @@ class AddEmployeeForm(QDialog):
             )
         else:
             callback_func()
-            self.close()
+            self.destroy(True)
 
     def clear(self):
         self.editFirstName.setText("")
@@ -41,7 +55,7 @@ class AddEmployeeForm(QDialog):
 class EmployeeSearchForm(QMainWindow):
     def __init__(self, cursor):
         super(EmployeeSearchForm, self).__init__()
-        uic.loadUi("./Resources/EmployeeSearchForm.ui", self)
+        uic.loadUi(resource_path("./Resources/EmployeeSearchForm.ui"), self)
         self._addEmployeeForm = AddEmployeeForm(self, self.add_employee)
         self.cursor = cursor
         self.editEmployeeName.returnPressed.connect(
@@ -121,7 +135,7 @@ class EmployeeSearchForm(QMainWindow):
 
 def main():
     try:
-        connection = sqlite3.connect("./Resources/EmployeeData.db")
+        connection = sqlite3.connect(resource_path("./Resources/EmployeeData.db"))
         cursor = connection.cursor()
 
         app = QApplication.instance()

@@ -65,11 +65,11 @@ class EmployeeSearchForm(QMainWindow):
             self.textResults.setPlainText("")
             for i, data in enumerate(employeeData):
                 results = results + "{}: {}\n".format(DATA_HEADERS[i], data)
-                print(results, end="")
         else:
             results = "Employee not found!"
             print(results)
 
+        print(results, end="")
         self.textResults.appendPlainText(results)
 
     def is_employee_exist(self, employeeName: str) -> list:

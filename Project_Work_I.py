@@ -27,7 +27,6 @@ class AddEmployeeForm(QDialog):
             QMessageBox.critical(
                 None, "Error", "All fields are required except address."
             )
-            return
         else:
             callback_func()
             self.close()

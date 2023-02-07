@@ -1,4 +1,3 @@
-from typing import final
 from PyQt5.QtWidgets import *
 from PyQt5 import uic
 import sqlite3

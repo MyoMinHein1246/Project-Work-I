@@ -27,7 +27,7 @@ class AddEmployeeForm(QDialog):
         uic.loadUi(resource_path("./Resources/AddEmployeeForm.ui"), self)
 
         self.btnAdd.clicked.connect(lambda: self.callback(callback_func))
-        self.btnCancel.clicked.connect(lambda: self.destroy(True))
+        self.btnCancel.clicked.connect(lambda: self.destroy(True, True))
         self.closeEvent = self.clear()
 
     def callback(self, callback_func):
@@ -42,7 +42,8 @@ class AddEmployeeForm(QDialog):
             )
         else:
             callback_func()
-            self.destroy(True)
+            self.clear()
+            self.destroy(True, True)
 
     def clear(self):
         self.editFirstName.setText("")
@@ -83,7 +84,7 @@ class EmployeeSearchForm(QMainWindow):
             results = "Employee not found!"
             print(results)
 
-        print(results, end="")
+        print(results)
         self.textResults.appendPlainText(results)
 
     def is_employee_exist(self, employeeName: str) -> list:
@@ -151,10 +152,10 @@ def main():
         print("[Error] ", err)
     finally:
         if cursor:
+            connection.commit()
+
             cursor.close()
             print("Closed cursor.")
-        if connection:
-            connection.commit()
             connection.close()
             print("Closed connection.")
 

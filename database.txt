@@ -1,0 +1,5 @@
+Myo Myo, Project Manager, 2000000, Yangon
+Mg Mg, Site Manager, 700000, Mandalay
+Su Su, Clerk, 350000, Yangon
+Soe Soe, Civil Engineer, 1200000, Mandalay
+Tun Tun, Security Staff, 200000, Yangon

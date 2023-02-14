@@ -1,4 +1,3 @@
-from multiprocessing import resource_sharer
 from PyQt5.QtWidgets import *
 from PyQt5 import uic
 import sqlite3
